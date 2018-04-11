@@ -20,7 +20,14 @@ class CallsController < ApplicationController
   VOICEMAIL_LENGTH = '30'
   VOICEMAIL_PATH = '/calls/voicemail_handler'
 
+  def index
+    # brute force approach - pagination and other niceties would come in a production environment
+    @calls = Call.all
+  end
+
   def incoming
+    # in production code, we'd want to validate the Twilio calls per their documentation
+
     # if we haven't saved the call yet, save it
     unless Call.exists?(sid: params[SID_PARAM])
       call_info = {
