@@ -55,3 +55,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # talk to the Twilio phone service
 gem 'twilio-ruby'
+
+# manage environment variables
+gem 'dotenv-rails'
