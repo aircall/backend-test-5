@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
   get 'calls/test'
-  get 'calls/incoming'
+  post 'calls/incoming'
+  get 'calls/status'
 end
