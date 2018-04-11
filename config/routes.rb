@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  get 'calls/test'
   post 'calls/incoming'
-  get 'calls/status'
+
+  post 'calls/voicemail_handler'
+
+  get 'calls/status_handler'
 end
