@@ -15,7 +15,7 @@ class CallsController < ApplicationController
   COMPLETED_STATUS = 'completed'.freeze
 
   MENU_OPTIONS = 'To redirect the call, press 1. To leave a voicemail, press 2.'
-  FORWARDING_NUMBER = '+19174283671' # '+15556667777'
+  FORWARDING_NUMBER = '+15556667777'
   VOICEMAIL_KEY = '#'
   VOICEMAIL_LENGTH = '30'
   VOICEMAIL_PATH = '/calls/voicemail_handler'
