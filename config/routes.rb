@@ -1,3 +1,9 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get 'calls', to: 'calls#index'
+
+  post 'calls/incoming'
+
+  post 'calls/voicemail_handler'
+
+  get 'calls/status_handler'
 end

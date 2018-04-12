@@ -21,3 +21,11 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore encrypted secrets key file.
+config/secrets.yml.key
+
+# Ignore IDEA files
+.idea
+*.iml
+/.env

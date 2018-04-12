@@ -1,0 +1,23 @@
+<style>
+  td { text-align: center; padding: .2em .5em; border: lightgrey 1px dotted }
+</style>
+
+<!-- it's not pretty but it shows the call information -->
+<table>
+  <tr>
+    <th>To</th>
+    <th>From</th>
+    <th>Status</th>
+    <th>Duration</th>
+    <th>Voicemail</th>
+  </tr>
+<% @calls.each do |c| %>
+  <tr>
+    <td><%= c.to %></td>
+    <td><%= c.from %></td>
+    <td><%= c.status %></td>
+    <td><%= c.duration %></td>
+    <td><% if c.voicemail %><a href='<%= c.voicemail%>'>&#x25b6;</a><% end %></td>
+  </tr>
+<% end %>
+</table>
