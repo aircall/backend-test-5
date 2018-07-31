@@ -24,8 +24,8 @@
 <script>
     const refreshInfoElem = document.getElementById('refresh_info')
     const intervalId = setInterval(() => window.location.reload(), 3000);
-    refreshInfoElem.textContent = 'Refreshing every 3s. Scroll to cancel';
-    window.onscroll = () => {
+    refreshInfoElem.textContent = 'Refreshing every 3s. Click here to cancel';
+    refreshInfoElem.onclick = () => {
         clearInterval(intervalId)
         refreshInfoElem.textContent = 'Stopped refreshing. Reload page to engage refresh';
     }
