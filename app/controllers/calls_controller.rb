@@ -62,7 +62,6 @@ class CallsController < ApplicationController
   end
 
   def answer_cb
-    logger.debug 'start answer'
     call = Call.new do |c|
       c.caller_number = params['From']
       c.call_sid = params['CallSid']
@@ -86,7 +85,6 @@ class CallsController < ApplicationController
   end
 
   def gather_cb
-    logger.debug 'start gather'
     raise ActionController::RoutingError, 'Not Found' unless params['Digits']
     call = Call.find_by(call_sid: params['CallSid'])
     response = Twilio::TwiML::VoiceResponse.new do |r|
@@ -142,7 +140,6 @@ class CallsController < ApplicationController
   end
 
   def voicemail_cb
-    logger.debug 'voicemail start'
     raise ActionController::RoutingError, 'Not Found' unless params['RecordingUrl']
     call = Call.find_by(call_sid: params['CallSid'])
     call.voicemail_url = params['RecordingUrl']
@@ -166,7 +163,6 @@ class CallsController < ApplicationController
       # Leaving this as is as the call ends up hanging up alone in ~5s
       r.hangup
     end
-    logger.debug response.to_s
     render xml: response.to_s
   end
 
