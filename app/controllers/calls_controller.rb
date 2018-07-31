@@ -63,6 +63,17 @@ class CallsController < ApplicationController
 
   def answer_cb
     logger.debug 'start answer'
+    call = Call.new do |c|
+      c.caller_number = params['From']
+      c.call_sid = params['CallSid']
+      c.status = 'ongoing'
+      c.call_events = [{
+        timestamp: DateTime.now.to_s,
+        event: 'start'
+      }]
+      c.voicemail_url = nil
+    end
+    call.save
     response = Twilio::TwiML::VoiceResponse.new
     gather = Twilio::TwiML::Gather.new(num_digits: '1', action: gather_url)
 
@@ -77,21 +88,55 @@ class CallsController < ApplicationController
   def gather_cb
     logger.debug 'start gather'
     raise ActionController::RoutingError, 'Not Found' unless params['Digits']
+    call = Call.find_by(call_sid: params['CallSid'])
     response = Twilio::TwiML::VoiceResponse.new do |r|
       case params['Digits']
       when '1'
+        call.call_events.push(
+          timestamp: DateTime.now.to_s,
+          event: 'pressed transfer'
+        )
+
         # Ring my phone
         r.say(message: 'Calling a representative')
         r.dial(number: '+33636950509')
+        r.redirect(dial_url)
       when '2'
+        call.call_events.push(
+          timestamp: DateTime.now.to_s,
+          event: 'pressed voicemail'
+        )
+
         # Record voicemail then redirect to voicemail_url to get its URL
         r.say(message: 'You can now leave a voicemail. Press # when you\'re done.')
-        r.record(timeout: 1, finishOnKey: '#', action: voicemail_url)
+        r.record(timeout: 5, finishOnKey: '#', action: voicemail_url)
       else
+        call.call_events.push(
+          timestamp: DateTime.now.to_s,
+          event: 'pressed invalid command'
+        )
+
         # Loop to main endpoint
         r.say(message: 'Returning to main menu.')
         r.redirect answer_url
       end
+    end
+    call.save
+    render xml: response.to_s
+  end
+
+  def dial_cb
+    raise ActionController::RoutingError, 'Not Found' unless params['CallSid']
+    call = Call.find_by(call_sid: params['CallSid'])
+    call.status = 'ended'
+    call.call_events.push(
+      timestamp: DateTime.now.to_s,
+      event: 'representative call ended'
+    )
+    call.save
+    response = Twilio::TwiML::VoiceResponse.new do |r|
+      r.say(message: 'Thanks for calling!')
+      r.hangup
     end
     render xml: response.to_s
   end
@@ -99,6 +144,14 @@ class CallsController < ApplicationController
   def voicemail_cb
     logger.debug 'voicemail start'
     raise ActionController::RoutingError, 'Not Found' unless params['RecordingUrl']
+    call = Call.find_by(call_sid: params['CallSid'])
+    call.voicemail_url = params['RecordingUrl']
+    call.status = 'ended'
+    call.call_events.push(
+      timestamp: DateTime.now.to_s,
+      event: 'left a voicemail'
+    )
+    call.save
 
     response = Twilio::TwiML::VoiceResponse.new do |r|
       r.say(message: 'We got your message. Thanks for calling!')
