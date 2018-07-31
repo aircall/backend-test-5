@@ -15,7 +15,7 @@
   <pre><%= JSON.generate(call.call_events, {object_nl: '<br/>', array_nl: '<br/>', indent: '&nbsp&nbsp', space: '&nbsp'}).html_safe %></pre>
   </p>
   <p>
-    <%= link_to 'Destroy', call, method: :delete, data: {confirm: 'Are you sure?'} %>
+    <%= link_to 'Destroy', call, method: :delete %>
   </p>
 <% end %>
 
@@ -23,8 +23,8 @@
 <br>
 <script>
     const refreshInfoElem = document.getElementById('refresh_info')
-    const intervalId = setInterval(() => window.location.reload(), 1500);
-    refreshInfoElem.textContent = 'Refreshing every 1.5s. Scroll to cancel';
+    const intervalId = setInterval(() => window.location.reload(), 3000);
+    refreshInfoElem.textContent = 'Refreshing every 3s. Scroll to cancel';
     window.onscroll = () => {
         clearInterval(intervalId)
         refreshInfoElem.textContent = 'Stopped refreshing. Reload page to engage refresh';
