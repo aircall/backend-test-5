@@ -12,4 +12,4 @@
 //
 //= require rails-ujs
 //= require turbolinks
-//= require_tree .
+// removed "require_tree ." due to a windows-only javascript runtime bug: https://stackoverflow.com/questions/12520456/execjsruntimeerror-on-windows-trying-to-follow-rubytutorial/14118913#14118913
