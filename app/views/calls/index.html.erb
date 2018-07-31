@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Calls</h1>
+<p id="refresh_info" style="color: red; font-weight: bold;"></p>
+
+<% @calls.each do |call| %>
+  <p>
+    created_at: <%= call.created_at %><br/>
+    updated_at: <%= call.updated_at %><br/>
+    status: <%= call.status %><br/>
+    voicemail_url: <%= call.voicemail_url %><br/>
+    call_sid: <%= call.call_sid %><br/>
+    caller_number: <%= call.caller_number %><br/>
+    call_events:
+  <pre><%= JSON.generate(call.call_events, {object_nl: '<br/>', array_nl: '<br/>', indent: '&nbsp&nbsp', space: '&nbsp'}).html_safe %></pre>
+  </p>
+  <p>
+    <%= link_to 'Destroy', call, method: :delete %>
+  </p>
+<% end %>
+
+
+<br>
+<script>
+    const refreshInfoElem = document.getElementById('refresh_info')
+    const intervalId = setInterval(() => window.location.reload(), 3000);
+    refreshInfoElem.textContent = 'Refreshing every 3s. Click here to cancel';
+    refreshInfoElem.onclick = () => {
+        clearInterval(intervalId)
+        refreshInfoElem.textContent = 'Stopped refreshing. Reload page to engage refresh';
+    }
+</script>
+<%= link_to 'New Call', new_call_path %>
