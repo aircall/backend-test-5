@@ -26,8 +26,7 @@ class TwilioController < ApplicationController
       when "2"
         twiml_record
       else
-        @output = "Returning to the main menu."
-        twiml_say(@output)
+        twiml_say("Returning to the main menu.")
     end
   end
 
