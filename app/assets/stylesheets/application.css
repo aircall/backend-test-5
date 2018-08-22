@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+.container {
+    position: relative;
+    float:none;
+    margin: 10px auto;
+    max-width: 600px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19)!important;
+}
+table {
+    overflow-x: auto;
+    border-spacing: 0;
+}
+
+tr:first-child {
+    border-bottom: 2px solid black;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+td {
+    border: 0;
+    padding: 5px;
+}
+
+

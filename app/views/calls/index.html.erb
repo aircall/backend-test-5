@@ -1,0 +1,27 @@
+
+
+<div class="container">
+  <h1>Call Log:</h1>
+
+  <table>
+    <tr>
+      <th>From</th>
+      <th>Status</th>
+      <th>Action taken</th>
+      <th>Duration</th>
+      <th>Recording</th>
+      <th>Start</th>
+    </tr>
+
+    <% @calls.each do |call| %>
+      <tr>
+        <td><%= call.from %></td>
+        <td><%= call.status %></td>
+        <td><%= call.action %></td>
+        <td><%= call.duration%></td>
+        <td><a href="<%= call.recording_url %>">Message</a></td>
+        <td><%= call.created_at %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
