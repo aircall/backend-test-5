@@ -60,17 +60,17 @@ class CallController < ApplicationController
   end
 
   def handle_redirect
-                @call = Call.find_by(twilio_id: params['CallSid'])
+    @call = Call.find_by(twilio_id: params['CallSid'])
     @call.update(status: params['DialCallStatus'], duration: params['DialCallDuration'])
   end
 
   def handle_recording_started
-                @call = Call.find_by(twilio_id: params['CallSid'])
+    @call = Call.find_by(twilio_id: params['CallSid'])
     @call.update(status:'recording_started', recording_url: params['RecordingUrl'], duration: params['RecordingDuration'])
   end
 
   def handle_recording_finished
-                    @call = Call.find_by(twilio_id: params['CallSid'])
+    @call = Call.find_by(twilio_id: params['CallSid'])
     @call.update(status: 'call_ended', duration: params['RecordingDuration'])
   end
 
