@@ -14,8 +14,16 @@
       <td><%= call.from %></td>
       <td><%= call.status %></td>
       <td><%= call.action %></td>
-      <td><%= call.duration%></td>
-      <td><a href="<%= call.recording_url %>">Message</a></td>
+      <td>
+        <% unless call.duration.nil? %>
+          <%= call.duration %>s
+        <% end %>
+      </td>
+      <td>
+        <% unless call.recording_url.nil? %>
+          <a href="<%= call.recording_url %>">Message</a>
+        <% end %>
+      </td>
       <td><%= call.created_at %></td>
       <td class="destroy"><%= link_to 'Destroy', 'call/'+call.id.to_s, :confirm => 'Are you sure?', :method => :delete, :remote=>true, :class=>'delete_post' %></td>
     </tr>
