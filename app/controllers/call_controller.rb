@@ -5,20 +5,19 @@ class CallController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
-  def create
-  @call = Call.new(params[:call])
-
-  @call.save
-  redirect_to @call
-  end
-
   def index
     @calls = Call.all
         render 'calls/index' #, :locals => {:calls => @calls}
   end
 
-  def new
-    @call = Call.new
+  def destroy
+    @call = Call.destroy(params['id'])
+    head :ok, :content_type => 'text/html'
+  end
+
+  def table_refresh
+    @calls = Call.all
+    render partial: 'calls/table'
   end
 
   def base_reply

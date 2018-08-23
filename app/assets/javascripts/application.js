@@ -12,4 +12,23 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery3
+//= require jquery_ujs
+// = require_self
 //= require_tree .
+
+$('document').ready(function() {
+    $('.delete_post').on('ajax:success', function() {
+        $(this).closest('tr').fadeOut();
+    });
+    setInterval(refreshTable, 3000);
+});
+
+function refreshTable() {
+    $.get({ url: "calls/refresh" }, function (table) {
+        $('#table').replaceWith(table);
+        $('.delete_post').on('ajax:success', function() {
+            $(this).closest('tr').fadeOut();
+        });
+    })
+}

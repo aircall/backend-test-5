@@ -1,0 +1,23 @@
+<table id="table">
+  <tr>
+    <th>From</th>
+    <th>Status</th>
+    <th>Action taken</th>
+    <th>Duration</th>
+    <th>Recording</th>
+    <th>Started at</th>
+    <th>Delete?</th>
+  </tr>
+
+  <% @calls.each do |call| %>
+    <tr>
+      <td><%= call.from %></td>
+      <td><%= call.status %></td>
+      <td><%= call.action %></td>
+      <td><%= call.duration%></td>
+      <td><a href="<%= call.recording_url %>">Message</a></td>
+      <td><%= call.created_at %></td>
+      <td class="destroy"><%= link_to 'Destroy', 'call/'+call.id.to_s, :confirm => 'Are you sure?', :method => :delete, :remote=>true, :class=>'delete_post' %></td>
+    </tr>
+  <% end %>
+</table>

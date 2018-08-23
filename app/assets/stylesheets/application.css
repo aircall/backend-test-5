@@ -39,4 +39,7 @@ td {
     padding: 5px;
 }
 
-
+.destroy:hover {
+    background-color: #ff4639;
+    transition: all 200ms;
+}
