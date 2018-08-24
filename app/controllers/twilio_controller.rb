@@ -24,71 +24,71 @@ class TwilioController < ApplicationController
       }
       Call.new(call_info).save
 
-    response = Twilio::TwiML::VoiceResponse.new
-    response.gather(action: 'menu', method: 'POST', numDigits: 1) do |gather|
-      gather.say(message: 'Thanks for aircalling, press 1 or 2.')
-    end
-    response.say(message: 'We didn\'t receive any input. Goodbye!')
+      response = Twilio::TwiML::VoiceResponse.new
+      response.gather(action: 'menu', method: 'POST', numDigits: 1) do |gather|
+        gather.say(message: 'Thanks for aircalling, press 1 or 2.')
+      end
+      response.say(message: 'We didn\'t receive any input. Goodbye!')
 
-    render xml: response.to_s
-  end
-
-
-  def menu
-    user_selection = params[:Digits]
-
-    case user_selection
-      when "1"
-        response = twiml_dial(PHONE_NUMBER_TO_CALL)
-      when "2"
-        response = twiml_record
-      else
-        response = twiml_say("Returning to the main menu.")
+      render xml: response.to_s
     end
 
-    update_call(params[PARAM_SID], params[PARAM_STATUS],
-                params[PARAM_DURATION], params[PARAM_RECORDING_URL])
-    render xml: response.to_s
-  end
 
-  private
-  def twiml_say(phrase, exit = false)
-    Twilio::TwiML::VoiceResponse.new do |r|
-      r.say(message: phrase)
-      if exit
-        r.hangup
-      else
-        r.redirect('voice')
+    def menu
+      user_selection = params[:Digits]
+
+      case user_selection
+        when "1"
+          response = twiml_dial(PHONE_NUMBER_TO_CALL)
+        when "2"
+          response = twiml_record
+        else
+          response = twiml_say("Returning to the main menu.")
+      end
+
+      update_call(params[PARAM_SID], params[PARAM_STATUS],
+                  params[PARAM_DURATION], params[PARAM_RECORDING_URL])
+      render xml: response.to_s
+    end
+
+    private
+    def twiml_say(phrase, exit = false)
+      Twilio::TwiML::VoiceResponse.new do |r|
+        r.say(message: phrase)
+        if exit
+          r.hangup
+        else
+          r.redirect('voice')
+        end
+      end
+
+    end
+
+    private
+    def twiml_dial(phone_number)
+      Twilio::TwiML::VoiceResponse.new do |r|
+        r.dial(number: phone_number)
       end
     end
 
-  end
-
-  private
-  def twiml_dial(phone_number)
-    Twilio::TwiML::VoiceResponse.new do |r|
-      r.dial(number: phone_number)
+    private
+    def twiml_record
+      Twilio::TwiML::VoiceResponse.new do |r|
+        r.record(timeout: 10)
+      end
     end
-  end
 
-  private
-  def twiml_record
-    Twilio::TwiML::VoiceResponse.new do |r|
-      r.record(timeout: 10)
+    private
+    def update_call(sid, new_status, duration, recording_url)
+      call = Call.find_by sid: sid
+      if call
+        call.status = new_status
+        call.duration = duration
+        call.voicemail = recording_url
+
+        call.save
+      end
     end
-  end
-
-  private
-  def update_call(sid, new_status, duration, recording_url)
-    call = Call.find_by sid: sid
-    if call
-      call.status = new_status
-      call.duration = duration
-      call.voicemail = recording_url
-
-      call.save
-    end
-  end
 
   end
 end
