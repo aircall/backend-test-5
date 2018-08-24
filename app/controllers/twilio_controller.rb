@@ -32,63 +32,63 @@ class TwilioController < ApplicationController
 
       render xml: response.to_s
     end
+  end
 
 
-    def menu
-      user_selection = params[:Digits]
+  def menu
+    user_selection = params[:Digits]
 
-      case user_selection
-        when "1"
-          response = twiml_dial(PHONE_NUMBER_TO_CALL)
-        when "2"
-          response = twiml_record
-        else
-          response = twiml_say("Returning to the main menu.")
-      end
-
-      update_call(params[PARAM_SID], params[PARAM_STATUS],
-                  params[PARAM_DURATION], params[PARAM_RECORDING_URL])
-      render xml: response.to_s
+    case user_selection
+      when "1"
+        response = twiml_dial(PHONE_NUMBER_TO_CALL)
+      when "2"
+        response = twiml_record
+      else
+        response = twiml_say("Returning to the main menu.")
     end
 
-    private
-    def twiml_say(phrase, exit = false)
-      Twilio::TwiML::VoiceResponse.new do |r|
-        r.say(message: phrase)
-        if exit
-          r.hangup
-        else
-          r.redirect('voice')
-        end
-      end
+    update_call(params[PARAM_SID], params[PARAM_STATUS],
+                params[PARAM_DURATION], params[PARAM_RECORDING_URL])
+    render xml: response.to_s
+  end
 
-    end
-
-    private
-    def twiml_dial(phone_number)
-      Twilio::TwiML::VoiceResponse.new do |r|
-        r.dial(number: phone_number)
-      end
-    end
-
-    private
-    def twiml_record
-      Twilio::TwiML::VoiceResponse.new do |r|
-        r.record(timeout: 10)
-      end
-    end
-
-    private
-    def update_call(sid, new_status, duration, recording_url)
-      call = Call.find_by sid: sid
-      if call
-        call.status = new_status
-        call.duration = duration
-        call.voicemail = recording_url
-
-        call.save
+  private
+  def twiml_say(phrase, exit = false)
+    Twilio::TwiML::VoiceResponse.new do |r|
+      r.say(message: phrase)
+      if exit
+        r.hangup
+      else
+        r.redirect('voice')
       end
     end
 
   end
+
+  private
+  def twiml_dial(phone_number)
+    Twilio::TwiML::VoiceResponse.new do |r|
+      r.dial(number: phone_number)
+    end
+  end
+
+  private
+  def twiml_record
+    Twilio::TwiML::VoiceResponse.new do |r|
+      r.record(timeout: 10)
+    end
+  end
+
+  private
+  def update_call(sid, new_status, duration, recording_url)
+    call = Call.find_by sid: sid
+    if call
+      call.status = new_status
+      call.duration = duration
+      call.voicemail = recording_url
+
+      call.save
+    end
+  end
+
 end
