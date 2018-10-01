@@ -3,7 +3,7 @@ class CallsController < ApplicationController
 	before_action :find_or_create_call, except: [:index]
 
 	def index
-		@calls = Call.all
+		@calls = Call.all || []
 	end
 
 	def incoming
