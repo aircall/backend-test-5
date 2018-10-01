@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170719183956) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "calls", force: :cascade do |t|
     t.string "call_sid"
     t.string "number"
