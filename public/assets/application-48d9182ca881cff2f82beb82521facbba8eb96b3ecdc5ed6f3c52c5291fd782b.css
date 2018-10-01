@@ -1,0 +1,147 @@
+/*------------------------------------*\
+    Call
+\*------------------------------------*/
+/* line 6, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__container {
+  height: 100%;
+  width: 100%;
+  background-image: url(/assets/paris-0ccfcb8dff33e294e9c7a8b9c5b682452e785a0e8f7e5e18939c2c0b530d272a.jpg);
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  text-align: center;
+}
+
+/* line 15, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list-wrapper {
+  width: 75%;
+  margin: 10px;
+  padding: 10px;
+  background-color: #696969;
+  color: white;
+}
+
+/* table */
+/* line 23, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list {
+  width: 95%;
+  margin: 10px;
+}
+/* line 27, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list th {
+  padding: 12px 0px;
+  background-color: #228b22;
+}
+/* line 32, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list tr {
+  padding: 10px 0px;
+  background-color: #808080;
+}
+/* line 37, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list td {
+  padding: 5px;
+  height: 55px;
+}
+/* line 42, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+.call__list audio {
+  width: 175px;
+}
+
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* line 48, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+
+  /* table */
+  /* line 52, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper {
+    width: 90%;
+  }
+  /* line 55, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  /* line 61, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper tr {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 5px solid #696969;
+    padding: 0px;
+  }
+  /* line 69, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50% !important;
+    padding-top: 10px;
+  }
+  /* line 77, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper td::before {
+    position: absolute;
+    top: 10px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+  /* line 86, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  .call__list-wrapper audio {
+    width: 150px;
+  }
+
+  /* line 89, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(1):before {
+    content: "Caller";
+  }
+
+  /* line 90, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(2):before {
+    content: "Call Action";
+  }
+
+  /* line 91, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(3):before {
+    content: "Time of Day";
+  }
+
+  /* line 92, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(4):before {
+    content: "Call Duration";
+  }
+
+  /* line 93, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(5):before {
+    content: "Call Status";
+  }
+
+  /* line 94, /Users/calvin/Desktop/backend-test-5/app/assets/stylesheets/calls.scss */
+  td:nth-of-type(6):before {
+    content: "Voicemail";
+  }
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+body, html {
+	height: 100%;
+    margin: 0;
+}
+

@@ -1,0 +1,40 @@
+<div class="call__container">
+  <div class="call__list-wrapper">
+	  <h1 class="call__list-header">Call Activity</h1>
+
+	  <table class='call__list'>
+	   	<thead>
+			<tr>
+	      		<th>Caller</th>
+	      		<th>Call Action</th>
+	      		<th>Time of Call</th>
+	      		<th>Call Duration</th>
+	      		<th>Call Status</th>
+	      		<th>Voicemail</th>
+	    	</tr>
+	  	</thead>
+	  	<tbody>
+		    <% @calls.each do |call| %>
+		    	<tr>
+			      <td><%= call.number %></td>
+			      <td><%= call.call_action %></td>
+			      <td><%= call.created_at.strftime("at %I:%M%p on %m/%d/%Y")%></td>
+			      <td><%= call.recording_duration %> seconds</td>
+			      <td><%= call.call_status %></td>
+
+			      <% if !call.call_action.nil? && call.call_action.include?("voicemail") %>
+			      	<td>
+			      		<audio controls>
+  							<source src=<%=call.recording_url%> type="audio/mpeg">
+						</audio>
+					</td>
+				  <% else %>
+				  	<td> --- </td>
+				  <% end %>
+
+			  	</tr>
+			<% end %>
+		</tbody>
+	  </table>
+  </div>
+</div>
