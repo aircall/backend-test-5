@@ -1,0 +1,13 @@
+%table.table.table-striped
+  %thead
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} Start Time
+      %th{:scope => "col"} Number
+      %th{:scope => "col"} Direction
+      %th{:scope => "col"} Status
+      %th{:scope => "col"} Url
+      %th{:scope => "col"} Duration
+  %tbody
+    - @calls.ordered.each do |call|
+      = render 'call', call: call

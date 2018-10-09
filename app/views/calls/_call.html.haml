@@ -1,0 +1,10 @@
+%tr{id: "call_#{call.id}"}
+  %td= call.id
+  %td= call.created_at
+  %td= call.number
+  %td= call.direction
+  %td= call.status
+  %td
+    - if call.url
+      %audio{controls: "", src: call.url}
+  %td= call.duration

@@ -1,0 +1,25 @@
+<tr id="call_<%= call.id %>">
+  <td>
+    <%= call.id %>
+  </td>
+  <td>
+    <%= call.created_at %>
+  </td>
+  <td>
+    <%= call.number %>
+  </td>
+  <td>
+    <%= call.direction %>
+  </td>
+  <td>
+    <%= call.status %>
+  </td>
+  <td>
+    <% if (call.url){ %>
+      <a href="<%= call.url %>">voicemail</a>
+    <% } %>
+  </td>
+  <td>
+    <%= call.duration %>
+  </td>
+</tr>

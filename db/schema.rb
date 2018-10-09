@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719183956) do
+ActiveRecord::Schema.define(version: 2018_10_12_045605) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "calls", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "call_sid"
+    t.string "number"
+    t.string "direction"
+    t.string "status"
+    t.string "url"
+    t.string "duration"
+    t.index ["call_sid"], name: "index_calls_on_call_sid", unique: true
+    t.index ["created_at"], name: "index_calls_on_created_at"
   end
 
 end

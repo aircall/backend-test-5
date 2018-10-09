@@ -6,5 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
-  channel_prefix: backend-test-4_production
+  url: redis://h:p2bb50e774159816e8a6aabed5361f359a0dbc12570545839f6a28d2a06f0c1a1@ec2-34-232-85-108.compute-1.amazonaws.com:62239
