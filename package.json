@@ -1,5 +1,7 @@
 {
   "name": "backend-test-4",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.3.1"
+  }
 }

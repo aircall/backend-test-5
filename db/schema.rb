@@ -12,7 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20170719183956) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "calls", force: :cascade do |t|
+    t.string "call_sid"
+    t.string "caller"
+    t.integer "call_duration"
+    t.string "recording_url"
+    t.string "call_status"
+    t.string "from"
+    t.string "to"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

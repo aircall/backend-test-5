@@ -6,5 +6,5 @@ test:
 
 production:
   adapter: redis
-  url: redis://localhost:6379/1
+  url: redis://redistogo:73615b43c41f0aaaf27065f4ab3d2904@spinyfin.redistogo.com:11168/
   channel_prefix: backend-test-4_production

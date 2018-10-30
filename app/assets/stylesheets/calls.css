@@ -1,0 +1,45 @@
+.header {
+  text-align: center;
+}
+
+table {
+  width: 95%;
+  margin: 50px;
+  background-color: #f7f7f7;
+}
+
+th {
+  padding: 10px 5px;
+  text-transform: uppercase;
+  font-size: 16px;
+  margin-left: 5px;
+  background-color: #888;
+  text-align: left;
+
+}
+tr {
+  padding: 10px 0px;
+}
+
+audio {
+  width: 100%;
+}
+
+tr:hover {
+  background-color: lightgrey;
+}
+
+td {
+  padding: 5px;
+  height: 30px;
+  text-align: center;
+}
+
+@keyframes updated {
+  from { background-color: lightgreen; }
+  to { background-color: inherit; }
+}
+.updated {
+  animation:         updated 1s;
+  animation-iteration-count: 5;
+}

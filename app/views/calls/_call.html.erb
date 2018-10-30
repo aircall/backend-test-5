@@ -1,0 +1,16 @@
+<tr id=row<%=call.id%>>
+  <td><%= call.to %></td>
+  <td><%= call.from %></td>
+  <td><%= call.caller %></td>
+  <td><%= call.created_at.strftime("%m/%d/%y at %I:%M %p")%></td>
+  <td><%= call.call_duration ? "#{call.call_duration} #{'second'.pluralize(call.call_duration.to_i)}" : "Not Available" %></td>
+  <td><%= call.call_status %></td>
+    <td>
+      <% if call.recording_url %>
+        <audio controls>
+          <source src=<%=call.recording_url%> type="audio/mpeg">
+        </audio>
+      <% else %>
+        Not Available
+      <% end %>
+  </td>

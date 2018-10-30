@@ -86,6 +86,11 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.action_cable.allowed_request_origins = ['https://jeff-aircall-backend.herokuapp.com', 'http://jeff-aircall-backend.herokuapp.com']
+
+
+  config.web_socket_server_url = "wss://jeff-aircall-backend.herokuapp.com/cable"
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
