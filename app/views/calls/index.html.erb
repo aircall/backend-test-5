@@ -20,28 +20,28 @@
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell table--heading">Action</div>
-				</div>
+                  <div class="td--inner_cell table--heading">Action</div>
+                </div>
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell table--heading">Status</div>
-				</div>
+                  <div class="td--inner_cell table--heading">Status</div>
+                </div>
               </td>								
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell table--heading">Duration</div>
-				</div>
+                  <div class="td--inner_cell table--heading">Duration</div>
+                </div>
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell table--heading">Recording URL</div>
-				</div>
+                  <div class="td--inner_cell table--heading">Recording URL</div>
+                </div>
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell table--heading">Call Made</div>
-				</div>
+                  <div class="td--inner_cell table--heading">Call Made</div>
+                </div>
               </td>
             </tr>
           </thead>
@@ -49,54 +49,54 @@
             <tr>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-						<%= call.from %>
-					</div>
+                  <div class="td--inner_cell">
+                    <%= call.from %>
+                  </div>
 				</div>
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-						 <%= call.action %>
-					</div>
+                  <div class="td--inner_cell">
+                    <%= call.action %>
+                  </div>
 				</div>
               </td>
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-					  <%= call.status %>
-					</div>
+                  <div class="td--inner_cell">
+                    <%= call.status %>
+                  </div>
 				</div>
               </td>	
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-					  <% unless call.duration.nil? %> 
-					    <%= call.duration %> Seconds
-					  <% else %>
-					    --
-					  <% end %>
-					</div>
+                  <div class="td--inner_cell">
+                    <% unless call.duration.nil? %> 
+                      <%= call.duration %> Seconds
+                    <% else %>
+                      --
+                    <% end %>
+                  </div>
 				</div>
               </td>								
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-						<% unless call.recording_url.nil? %>
-					    	<a target="_blank" href="<%= call.recording_url %>">Recording URL</a>
-					  	<% else %>
-					    	<span>--</span>
-					  	<% end %>
-					</div>
+                  <div class="td--inner_cell">
+                    <% unless call.recording_url.nil? %>
+                      <a target="_blank" href="<%= call.recording_url %>">Recording URL</a>
+                    <% else %>
+                      <span>--</span>
+                    <% end %>
+                  </div>
 				</div>
               </td>															
               <td>
                 <div class="td--inner">
-					<div class="td--inner_cell">
-						<span class="created-at">
-							<%= call.created_at.strftime("%Y-%m-%dT %H:%M") %>
-						</span>
-					</div>
+                  <div class="td--inner_cell">
+                    <span class="created-at">
+                      <%= call.created_at.strftime("%Y-%m-%dT %H:%M") %>
+                    </span>
+                  </div>
 				</div>
               </td>
             </tr>
