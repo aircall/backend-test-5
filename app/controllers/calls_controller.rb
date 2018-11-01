@@ -8,7 +8,7 @@ class CallsController < ApplicationController
     @calls = Call.order('created_at DESC')
   end
 
-  # Twilio webhook handler starting point for incoming calls
+  # Receives data from Twilio when a new call comes in
   # POST '/ivr/start'
   def start
     @call = Call.create(sid: params[:CallSid], from: params[:Caller], status: params[:CallStatus])
@@ -19,7 +19,7 @@ class CallsController < ApplicationController
     render xml: response.to_s
   end
 
-  # Handle the users response 
+  # Handles the users selected choice
   # POST '/ivr/response'
   def user_response
     user_selection = params[:Digits]
@@ -37,25 +37,25 @@ class CallsController < ApplicationController
     render xml: response.to_s
   end
 
-  # Forward call selected
+  # Updates call record when user has selected forwarding (option 1)
   # POST '/ivr/forward'
   def forward
     @call.update(action: 'forward', status: params[:CallStatus])
   end
 
-  # Record message selected
+  # Updates call record when user has selected to leave a message (option 2)
   # POST '/ivr/record'
   def record
     @call.update(action: 'record', status: params[:CallStatus])
   end
 
-  # Record message completed
+  # Updates call record after a message has been recorded
   # POST '/ivr/after-record'
   def after_record
     @call.update(status: 'completed', recording_url: params[:RecordingUrl], duration: params[:RecordingDuration])
   end
   
-  # Webhook handler for call status change
+  # Receives data from Twilio when call status changes
   # POST '/ivr/call-status-change'
   def call_status_change
     @call.update(status: params[:CallStatus], duration: params[:CallDuration])
