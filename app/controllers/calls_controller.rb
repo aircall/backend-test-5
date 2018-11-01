@@ -8,8 +8,8 @@ class CallsController < ApplicationController
     @calls = Call.order('created_at DESC')
   end
 
-  # Twilio webhook starting point for incoming calls
-  # POST /ivr/start
+  # Twilio webhook handler starting point for incoming calls
+  # POST '/ivr/start'
   def start
     @call = Call.create(sid: params[:CallSid], from: params[:Caller], status: params[:CallStatus])
     response = Twilio::TwiML::VoiceResponse.new
@@ -19,7 +19,7 @@ class CallsController < ApplicationController
     render xml: response.to_s
   end
 
-  # Handles the users response 
+  # Handle the users response 
   # POST '/ivr/response'
   def user_response
     user_selection = params[:Digits]
@@ -38,23 +38,29 @@ class CallsController < ApplicationController
   end
 
   # Forward call selected
-  # Post '/ivr/forward'
+  # POST '/ivr/forward'
   def forward
     @call.update(action: 'forward', status: params[:CallStatus])
   end
 
   # Record message selected
-  # Post '/ivr/record'
+  # POST '/ivr/record'
   def record
     @call.update(action: 'record', status: params[:CallStatus])
   end
 
   # Record message completed
-  # Post '/ivr/after-record'
+  # POST '/ivr/after-record'
   def after_record
     @call.update(status: 'completed', recording_url: params[:RecordingUrl], duration: params[:RecordingDuration])
   end
   
+  # Webhook handler for call status change
+  # POST '/ivr/call-status-change'
+  def call_status_change
+    @call.update(status: params[:CallStatus], duration: params[:CallDuration])
+  end
+
   private
     def find_call
       @call = Call.find_by(sid: params[:CallSid])
