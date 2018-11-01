@@ -15,7 +15,7 @@ class CallsController < ApplicationController
     response = Twilio::TwiML::VoiceResponse.new
     response.gather(action: '/ivr/response', method: 'POST') do |gather|
       gather.say(message: 'Thank you for calling Zayne. Please press 1 to reach his primary number. Press 2 to leave a message.', voice: 'Alice')
-	  end
+    end
     render xml: response.to_s
   end
 
