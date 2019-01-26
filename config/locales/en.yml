@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  voice:
+    messages:
+      gather: "Welcome on OzoneCall. Press 1 to Call Julien. Press 2 to leave a message. Thank you."
+      redirect: "You are redirect. Good bye"
+      leave_message: "Please leave a message"
+      hangup: "Thank you and goodbye"
