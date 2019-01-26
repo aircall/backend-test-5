@@ -2,11 +2,8 @@ class CallsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: [:status]
 
-  def home
-    render plain: "test"
+  def index
+    @calls = Call.all
   end
 
-  def status
-    render xml: VOIP::Response.new
-  end
 end
