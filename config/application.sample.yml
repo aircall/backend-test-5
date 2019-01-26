@@ -5,3 +5,6 @@
 TWILIO_ACCOUNT_SID: "TWILIO_ACCOUNT_SID" # get it on https://www.twilio.com/console
 TWILIO_AUTH_TOKEN: "TWILIO_AUTH_TOKEN" # get it on https://www.twilio.com/console
 REDIRECT_PHONE_NUMBER: "0033123456789" #your redirection phone number
+NUMBER_SID: "NUMBER_SID" # set only if your twilio account has more than one number
+VOICE_WEBHOOK_URL: "https://tildedash.ngrok.io/calls/incoming"
+STATUS_WEBHOOK_URL: : "https://tildedash.ngrok.io/calls/finished"

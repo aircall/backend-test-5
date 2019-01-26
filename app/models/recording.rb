@@ -1,17 +1,22 @@
 # == Schema Information
 #
-# Table name: calls
+# Table name: recordings
 #
 #  id           :bigint(8)        not null, primary key
-#  country      :string
 #  duration_s   :integer
-#  end_at       :datetime
-#  phone_number :string
 #  provider_sid :string
+#  started_at   :datetime
+#  url          :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  call_id      :bigint(8)
+#
+# Indexes
+#
+#  index_recordings_on_call_id  (call_id)
 #
 
-class Call < ApplicationRecord
-  has_one :recording
+class Recording < ApplicationRecord
+
+  belongs_to :call
 end

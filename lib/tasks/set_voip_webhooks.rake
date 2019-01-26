@@ -10,6 +10,7 @@ namespace :voip do
       #otherwise, we suppose that the Twilio has only one numbers configured
       number = @client.incoming_phone_numbers.list.first
     end
-    number.update(voice_url: ENV['VOICE_URL_WEBHOOK_URL'])
+    number.update(  voice_url: ENV['VOICE_WEBHOOK_URL'],
+                    status_callback: ENV['STATUS_WEBHOOK_URL'])
   end
 end
