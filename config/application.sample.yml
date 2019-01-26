@@ -1,0 +1,7 @@
+# Add configuration values here, as shown below.
+# and
+# Rename this file into application.yml
+#
+TWILIO_ACCOUNT_SID: "TWILIO_ACCOUNT_SID" # get it on https://www.twilio.com/console
+TWILIO_AUTH_TOKEN: "TWILIO_AUTH_TOKEN" # get it on https://www.twilio.com/console
+REDIRECT_PHONE_NUMBER: "0033123456789" #your redirection phone number
