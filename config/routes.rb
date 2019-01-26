@@ -8,5 +8,6 @@ Rails.application.routes.draw do
     post :home, on: :collection
     post :incoming, on: :collection
     post :sorting, on: :collection
+    post :recording, on: :collection
   end
 end
