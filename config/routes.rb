@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   root to: "calls#home"
 
 
+  namespace :calls do
+    resource :incoming, only: :create
+    resource :sorted, only: :create
+    resource :recorded, only: :create
+  end
+
   resources :calls, only: :none do
     post :home, on: :collection
-    post :incoming, on: :collection
-    post :sorting, on: :collection
-    post :recording, on: :collection
+    post :status, on: :collection
   end
 end

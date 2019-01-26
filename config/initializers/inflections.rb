@@ -12,4 +12,6 @@
 
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'VOIP'
+  inflect.irregular 'sorted', 'sorted'
+  inflect.irregular 'recorded', 'recorded'
 end
