@@ -16,7 +16,16 @@ class CallsController < ApplicationController
 
   def sorting
     user_selection = params[:Digits]
-    twiml_say("you pressed #{user_selection}")
+
+    case user_selection
+    when 1
+      response = Twilio::TwiML::VoiceResponse.new
+      response.dial(number: ENV['REDIRECT_PHONE_NUMBER'])
+      response.say(message: 'You are redirect. Good bye')
+      render xml: response.to_s
+    when 2
+      twiml_say("you pressed #{user_selection}")
+    end
   end
 
   def home
