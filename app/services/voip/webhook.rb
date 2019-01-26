@@ -14,5 +14,16 @@ module VOIP
       }
     end
 
+    def self.recording_params(params)
+      recording_params = params.permit(:RecordingSid, :RecordingUrl, :CallSid, :RecordingStartTime, :RecordingDuration)
+      {
+        duration_s: recording_params[:RecordingDuration],
+        provider_sid: recording_params[:RecordingSid],
+        started_at: recording_params[:RecordingStartTime],
+        url: recording_params[:RecordingUrl],
+        call_provider_id: recording_params[:CallSid]
+      }
+    end
+
   end
 end

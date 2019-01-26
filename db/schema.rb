@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190126161604) do
+ActiveRecord::Schema.define(version: 20190126170336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20190126161604) do
     t.string "provider_sid"
     t.string "phone_number"
     t.datetime "end_at"
+  end
+
+  create_table "recordings", force: :cascade do |t|
+    t.string "url"
+    t.bigint "call_id"
+    t.string "provider_sid"
+    t.datetime "started_at"
+    t.integer "duration_s"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["call_id"], name: "index_recordings_on_call_id"
   end
 
 end
