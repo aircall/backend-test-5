@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BackendTest4</title>
+    <title>OzoneCall</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +12,12 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container">
+      <header class="text-center m-5">
+        <h1>OzoneCall</h1>
+        <h2><%= t('.subtitle', phone_number: number_to_phone(ENV['PHONE_NUMBER'], delimiter: ' ')) %></h2>
+      </header>
+      <%= yield %>
+    </div>
   </body>
 </html>

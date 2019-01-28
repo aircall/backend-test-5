@@ -1,0 +1,33 @@
+<div id="accordion">
+  <% @calls.each do |call| %>
+    <div class="card call">
+      <div class="card-header">
+        <h5 class="mb-0">
+          <button class="btn btn-link" data-toggle="collapse" data-target="#call-<%= call.id %>" aria-expanded="true" aria-controls="<%= call.id %>">
+            <div>
+              <% if call.choice %>
+                <span class="badge badge-primary"><%= human_scenario_name(call.choice) %></span>
+              <% end %>
+              <%= number_to_phone(call.phone_number, delimiter: ' ') %> |
+              <%= call.created_at %>
+              <%= "| #{call.duration_s} s" if call.duration_s %>
+            </div>
+          </button>
+        </h5>
+      </div>
+
+      <div id="call-<%= call.id %>" class="collapse" aria-labelledby="<%= call.id %>" data-parent="#accordion">
+        <div class="card-body">
+          <% if call.voice_message_available? %>
+            <div class="float-right"><audio controls src="<%= call.recording.url %>">Not supported</audio></div>
+          <% end %>
+          <ul>
+            <li><%= t('.country') %>: <%= call.country %></li>
+            <li><%= t('.sid') %>: <%= call.provider_sid %></li>
+            <li><%= t('.dates') %>: <%= call.created_at %> - <%= call.end_at %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

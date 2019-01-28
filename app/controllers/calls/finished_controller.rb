@@ -9,7 +9,7 @@ class Calls::FinishedController < ApplicationController
       @call = Call.find_by(provider_sid: status_params.delete(:call_provider_sid)).update(status_params)
     end
 
-    render xml: VOIP::Response.new.gather_digit!(calls_sorted_path, I18n.t('voice.messages.gather'))
+    render xml: VOIP::Response.new
   end
 
 end

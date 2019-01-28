@@ -25,13 +25,21 @@ module VOIP
       }
     end
 
+    def self.gather_params(params)
+      gather_params = params.permit(:CallSid)
+      {
+        call_provider_sid: gather_params[:CallSid]
+      }
+    end
+
     def self.status_params(params)
       status_params = params.permit(:Timestamp, :CallSid, :CallStatus, :CallDuration)
       {
         end_at: status_params[:Timestamp],
         status: status_params[:CallStatus].downcase.to_sym,
         duration_s: status_params[:CallDuration],
-        provider_sid: status_params[:CallSid]
+        provider_sid: status_params[:CallSid],
+        call_provider_sid: status_params[:CallSid]
       }
     end
 
