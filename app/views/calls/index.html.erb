@@ -6,7 +6,7 @@
           <button class="btn btn-link" data-toggle="collapse" data-target="#call-<%= call.id %>" aria-expanded="true" aria-controls="<%= call.id %>">
             <div>
               <% if call.choice %>
-                <span class="badge badge-primary"><%= human_scenario_name(call.choice) %></span>
+                <span class="badge badge-primary"><%= human_choice_name(call.choice) %></span>
               <% end %>
               <%= number_to_phone(call.phone_number, delimiter: ' ') %> |
               <%= call.created_at %>
