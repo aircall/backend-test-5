@@ -28,8 +28,8 @@ module VOIP
     end
 
     def forward_to_phone_number(phone_number, message = nil)
-      @response.dial(number: phone_number)
       @response = @response.say(message: message)
+      @response = @response.dial(number: phone_number)
     end
 
     def forward_to_me(message = nil)

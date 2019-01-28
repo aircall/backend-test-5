@@ -8,3 +8,4 @@ REDIRECT_PHONE_NUMBER: "0033123456789" #your redirection phone number
 NUMBER_SID: "NUMBER_SID" # set only if your twilio account has more than one number
 VOICE_WEBHOOK_URL: "https://tildedash.ngrok.io/calls/incoming"
 STATUS_WEBHOOK_URL: : "https://tildedash.ngrok.io/calls/finished"
+PHONE_NUMBER: "PHONE_NUMBER" # phone number of the service

@@ -3,7 +3,9 @@ class Calls::SortedController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
-    case VOIP::Gather.new(params).digit
+    digit = VOIP::Gather.new(params).digit
+    @call = Call.find_by(provider_sid: VOIP::Webhook.gather_params(params)[:call_provider_sid]).update(choice: digit)
+    case digit
     when 1
       render xml: VOIP::Response.new.forward_to_me(I18n.t('voice.messages.redirect'))
     when 2
