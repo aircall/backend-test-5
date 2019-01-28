@@ -19,4 +19,8 @@
 class Recording < ApplicationRecord
 
   belongs_to :call
+
+  def message_available?
+    self.url.present?
+  end
 end
