@@ -16,7 +16,9 @@
 class Call < ApplicationRecord
   has_one :recording
 
+  enum choice: { forwarding: 1, voice_recording: 2, other: 3 }
+
   def voice_message_available?
-    self.recording && self.recording.url
+    self.voice_recording? && self.recording.try(:message_available?)
   end
 end
