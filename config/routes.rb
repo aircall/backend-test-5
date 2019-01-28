@@ -10,7 +10,5 @@ Rails.application.routes.draw do
     resource :finished, only: :create
   end
 
-  resources :calls, only: :none do
-    post :home, on: :collection
-  end
+  resources :calls, only: [:index]
 end

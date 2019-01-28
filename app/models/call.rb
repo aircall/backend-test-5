@@ -21,4 +21,9 @@ class Call < ApplicationRecord
   def voice_message_available?
     self.voice_recording? && self.recording.try(:message_available?)
   end
+
+  def choice=(digit)
+    digit = :other unless self.class.choices.values.include?(digit)
+    super
+  end
 end
