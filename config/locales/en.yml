@@ -37,8 +37,8 @@ en:
       leave_message: "Please leave a message"
       hangup: "Thank you and goodbye"
   calls:
-    forwarded: "Forwarded"
-    voice_message: "Voice message"
+    forwarding: "Forwarded"
+    voice_recording: "Voice message"
     other: "Other"
     index:
       country: "Country"
