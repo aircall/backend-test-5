@@ -1,0 +1,27 @@
+<br>
+<h1>Index of calls</h1>
+<table class="table">
+  <thead class="thead-light">
+  <tr>
+    <th>Date Time</th>
+    <th>Caller</th>
+    <th>Country</th>
+    <th>Digit</th>
+    <th>Status</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @calls.each do |call| %>
+    <tr>
+      <td><%= call.created_at %></td>
+      <td><%= call.caller %></td>
+      <td><%= call.from %></td>
+      <td><%= call.digits %></td>
+      <td><%= call.call_status %></td>
+      <td><%= link_to 'Show', show_path(call.call_sid) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
