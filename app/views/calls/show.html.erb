@@ -1,49 +1,55 @@
 <br>
-<p>
-  <strong>Call ID:</strong>
-  <%= @call.call_sid %>
-</p>
-<p>
-  <strong>Date Time:</strong>
-  <%= @call.created_at %>
-</p>
-<p>
-  <strong>Caller:</strong>
-  <%= @call.caller %>
-</p>
-<p>
-  <strong>Country:</strong>
-  <%= @call.from %>
-</p>
-<p>
-  <strong>Call Status:</strong>
-  <%= @call.call_status %>
-</p>
-<p>
-  <strong>Digit:</strong>
-  <%= @call.digits %>
-</p>
-<% if @call.digits == 1 %>
-    <p>
-        <strong>Redirected Call Status:</strong>
-        <%= @call.redirected_call_status %>
-    </p>
-    <p>
-        <strong>Redirected Call Duration:</strong>
-        <%= @call.redirected_call_duration %>
-    </p>
-<% elsif @call.digits == 2 %>
-    <p>
-        <strong>Voice URL:</strong>
-        <audio controls>
-            <source src=<%= @call.voice_url %> type="audio/wav">
-            Your browser does not support the audio element.
-        </audio>
-    </p>
-    <p>
-        <strong>Voice Duration:</strong>
-        <%= @call.voice_duration %>
-    </p>
-<% end %>
-
-<%= link_to 'Back', root_path %>
+<div class="row justify-content-md-center">
+    <div class="card" style="width: 38rem;">
+      <div class="card-body">
+        <h5 class="card-title">Call Info</h5>
+            <p>
+              <strong>Call ID:</strong>
+              <%= @call.call_sid %>
+            </p>
+            <p>
+              <strong>Date Time:</strong>
+              <%= @call.created_at %>
+            </p>
+            <p>
+              <strong>Caller:</strong>
+              <%= @call.caller %>
+            </p>
+            <p>
+              <strong>Country:</strong>
+              <%= @call.from %>
+            </p>
+            <p>
+              <strong>Call Status:</strong>
+              <%= @call.call_status %>
+            </p>
+            <p>
+              <strong>Digit:</strong>
+              <%= @call.digits %>
+            </p>
+            <% if @call.digits == 1 %>
+                <p>
+                    <strong>Redirected Call Status:</strong>
+                    <%= @call.redirected_call_status %>
+                </p>
+                <p>
+                    <strong>Redirected Call Duration:</strong>
+                    <%= @call.redirected_call_duration %>
+                </p>
+            <% elsif @call.digits == 2 %>
+                <p>
+                    <strong>Voice URL:</strong>
+                    <audio controls>
+                        <source src=<%= @call.voice_url %> type="audio/wav">
+                        Your browser does not support the audio element.
+                    </audio>
+                </p>
+                <p>
+                    <strong>Voice Duration:</strong>
+                    <%= @call.voice_duration %>
+                </p>
+            <% end %>
+            <%= link_to 'Back', root_path, :class => "btn btn-primary" %>
+      </div>
+    </div>
+</div>

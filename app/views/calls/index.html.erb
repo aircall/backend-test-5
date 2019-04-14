@@ -1,5 +1,5 @@
 <br>
-<h1>Index of calls</h1>
+<h1>Received calls</h1>
 <table class="table">
   <thead class="thead-light">
   <tr>
@@ -20,7 +20,7 @@
       <td><%= call.from %></td>
       <td><%= call.digits %></td>
       <td><%= call.call_status %></td>
-      <td><%= link_to 'Show', show_path(call.call_sid) %></td>
+      <td><%= link_to 'Show', show_path(call.call_sid), :class => "btn btn-primary" %></td>
     </tr>
   <% end %>
   </tbody>
