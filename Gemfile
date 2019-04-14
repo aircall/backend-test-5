@@ -57,4 +57,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twilio-ruby', '~> 5.22.1'
 
 # Use PostgreSQL as the database
-gem 'pg'
+gem 'pg', '~> 0.20'
