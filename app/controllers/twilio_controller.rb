@@ -40,7 +40,7 @@ class TwilioController < ApplicationController
 		@call = Call.find_by(sid: sid)
 		@call.inputs = @call.inputs.to_s + input.to_s
 		@call.save
-		@recording = Recording.new(calls_id: @call.id, duration: duration, url: url)
+		@recording = Recording.new(call_id: @call.id, duration: duration, url: url)
 		@recording.save
 
 		response = Twilio::TwiML::VoiceResponse.new

@@ -1,7 +1,7 @@
 class CreateRecordings < ActiveRecord::Migration[5.1]
   def change
     create_table :recordings do |t|
-    	t.references :calls
+    	t.references :call
     	t.integer :duration
     	t.string :url, limit: 200
 

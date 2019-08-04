@@ -23,12 +23,12 @@ ActiveRecord::Schema.define(version: 20190804185734) do
   end
 
   create_table "recordings", force: :cascade do |t|
-    t.integer "calls_id"
+    t.integer "call_id"
     t.integer "duration"
     t.string "url", limit: 200
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["calls_id"], name: "index_recordings_on_calls_id"
+    t.index ["call_id"], name: "index_recordings_on_call_id"
   end
 
 end
