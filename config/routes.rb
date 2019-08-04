@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   post 'twilio/initial'
   post 'twilio/keys'
   post 'twilio/recording'
+  post 'twilio/status'
 end
