@@ -67,8 +67,8 @@ class TwilioController < ApplicationController
 		@call.routing = 'forwarded'
 		@call.save
 		response = Twilio::TwiML::VoiceResponse.new
-		response.say(message: 'You are being forwarded')
-		response.dial(number: '')
+		response.say(message: 'You are being forwarded.')
+		response.dial(number: Rails.configuration.forward_phone_number)
 		render xml:response
 	end
 
