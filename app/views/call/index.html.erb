@@ -1,0 +1,36 @@
+<table class="pure-table pure-table-bordered">
+	<thead>
+		<tr>
+			<th>sid</th>
+			<th>start</th>
+			<th>status</th>
+			<th>caller</th>
+			<th>routing</th>
+			<th>inputs</th>
+			<th>message creation</th>
+			<th>message duration</th>
+			<th>message</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @calls.each do |call| %>
+		<tr>
+			<td><%= call.sid %></td>
+			<td><%= call.created_at %></td>
+			<td><%= call.status %></td>
+			<td><%= call.caller %></td>
+			<td><%= call.routing %></td>
+			<td><%= call.inputs %></td>
+			<% if call.recording != nil -%>
+			<td><%= call.recording.created_at %></td>
+			<td><%= call.recording.duration %>s</td>
+			<td><a href="<%= call.recording.url %>">access recording</a></td>
+			<% else -%>
+			<td />
+			<td />
+			<td />
+			<% end -%>
+		</tr>
+		<% end %>
+	</tbody>
+</table>
