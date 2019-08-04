@@ -10,11 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719183956) do
+ActiveRecord::Schema.define(version: 20190804160241) do
 
   create_table "calls", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sid", limit: 40
+    t.string "caller", limit: 20
+    t.string "routing", limit: 10
+    t.string "inputs", limit: 100
+  end
+
+  create_table "recordings", force: :cascade do |t|
+    t.integer "calls_id"
+    t.integer "duration"
+    t.string "url", limit: 200
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["calls_id"], name: "index_recordings_on_calls_id"
   end
 
 end
