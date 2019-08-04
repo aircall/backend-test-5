@@ -6,9 +6,9 @@ class TwilioController < ApplicationController
 	def initial
 		sid = params[:CallSid]
 		caller = params[:From]
-		@call = Call.new(sid: sid, caller: caller)
-        @call.save
-
+		@call = Call.find_or_create_by(sid: sid)
+		@call.caller = caller
+		@call.save
 		response = Twilio::TwiML::VoiceResponse.new
 		response.gather(num_digits: '1', action: url_for(controller: 'twilio', action: 'keys')) do |gather|
 			gather.say(message: 'Press 1 to be forwarded. Press 2 to leave a message.')
@@ -35,9 +35,13 @@ class TwilioController < ApplicationController
 	def recording
 		sid = params[:CallSid]
 		url = params[:RecordingUrl]
+		input = params[:Digits]
 		duration = params[:RecordingDuration]
 		@call = Call.find_by(sid: sid)
+		@call.inputs = @call.inputs.to_s + input.to_s
+		@call.save
 		@recording = Recording.new(calls_id: @call.id, duration: duration, url: url)
+		@recording.save
 
 		response = Twilio::TwiML::VoiceResponse.new
 		response.say(message: 'Thank you for leaving a message.')
@@ -60,7 +64,7 @@ class TwilioController < ApplicationController
 		@call.save
 		response = Twilio::TwiML::VoiceResponse.new
 		response.say(message: 'You will now be able to leave a message. To end it, please press the star key.')
-		response.record(action: url_for(controller: 'twilio', action: 'recording'), method: 'GET', max_length: 20, finish_on_key: '*')
+		response.record(action: url_for(controller: 'twilio', action: 'recording'), max_length: 20, finish_on_key: '*')
 		render xml: response
 	end
 
