@@ -7,10 +7,10 @@ class TwilioController < ApplicationController
 		sid = params[:CallSid]
 		status = params[:CallStatus]
 		caller = params[:From]
-		@call = Call.find_or_create_by(sid: sid)
-		@call.caller = caller
-		@call.status = status
-		@call.save
+		@call = Call.find_or_create_by(sid: sid) do |call|
+			call.caller = caller
+			call.status = status
+		end
 		response = Twilio::TwiML::VoiceResponse.new
 		response.gather(num_digits: '1', action: url_for(controller: 'twilio', action: 'keys')) do |gather|
 			gather.say(message: 'Press 1 to be forwarded. Press 2 to leave a message.')
@@ -23,7 +23,8 @@ class TwilioController < ApplicationController
 		choice = params[:Digits]
 		status = params[:CallStatus]
 		@call = Call.find_by(sid: sid)
-		@call.inputs = @call.inputs.to_s + choice.to_s
+		# Not saving now, we will save depending on routing
+		@call.inputs = [@call.inputs.to_s, choice.to_s].join(' ')
 		@call.status = status
 
 		case choice
@@ -43,11 +44,8 @@ class TwilioController < ApplicationController
 		status = params[:CallStatus]
 		duration = params[:RecordingDuration]
 		@call = Call.find_by(sid: sid)
-		@call.inputs = @call.inputs.to_s + input.to_s
-		@call.status = status
-		@call.save
-		@recording = Recording.new(call_id: @call.id, duration: duration, url: url)
-		@recording.save
+		@call.update(inputs: [@call.inputs.to_s, input.to_s].join(' '), status: status)
+		@recording = Recording.create(call_id: @call.id, duration: duration, url: url)
 
 		response = Twilio::TwiML::VoiceResponse.new
 		response.say(message: 'Thank you for leaving a message.')
@@ -61,6 +59,7 @@ class TwilioController < ApplicationController
 		@call = Call.find_by(sid: sid)
 		@call.status = status
 		@call.save
+		# return no content
 	end
 
 	private
