@@ -51,7 +51,7 @@ class IvrController < ApplicationController
   private
 
   def set_params
-    params.permit(:From, :Direction, :Called, :msg,
+    params.permit(:From, :Direction, :Called,
                   :CallStatus, :Digits, :RecordingSid,
                   :CallSid, :RecordingDuration, :RecordingUrl)
   end
