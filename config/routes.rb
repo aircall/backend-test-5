@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   post 'ivr/phone_redirection', defaults: { format: 'xml' }
   post 'ivr/process_incoming_call'
   resources :calls, only: [:index]
+  root 'calls#index'
 end
