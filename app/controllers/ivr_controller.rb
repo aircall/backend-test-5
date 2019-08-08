@@ -1,15 +1,23 @@
 # frozen_string_literal: true
 
-# Web service which handle incoming calls
+# Web service which handle incoming calls.
+# We need to disable verifying the Rails authenticity token.
+# to do : securing webhooks using Rack Middleware
+# link : https://www.twilio.com/blog/2014/09/securing-your-ruby-webhooks-with-rack-middleware.html
 class IvrController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :set_call, only: %i[voice_mail_redirection phone_redirection]
 
   # A new incoming call always reachs
   # at first process_incoming_call method
-  # Webhook configuration: calls/process_incoming_call
+  # Webhook configuration: ivr/process_incoming_call
   def process_incoming_call
-    @call = Call.create(call_params)
+    @call = Call.new(call_params)
+    begin
+      @call.save
+    rescue => e
+      puts "Rescued: #{e}"
+    end
     give_choice
   end
 
@@ -25,17 +33,21 @@ class IvrController < ApplicationController
 
   def voice_mail_redirection
     resp = IncomingCallManager.new(set_params, path_params).end_voice_mail
-    @call.update(forwarding: 2,
-                 status: 'completed',
-                 duration: set_duration)
-    Record.create(record_params)
+    begin
+      @call.update(forwarding: 2,
+        status: 'completed',
+        duration: set_duration)
+      Record.create(record_params)
+    rescue => e
+      puts "Rescued: #{e}"
+    end
     render xml: resp
   end
 
   def phone_redirection
     @call.update(forwarding: 1,
                  status: 'completed',
-                 duration: set_duration)
+                 duration: set_duration) if @call
     resp = IncomingCallManager.new(set_params, path_params).end_phone_call
     render xml: resp
   end
