@@ -26,7 +26,7 @@ class IvrController < ApplicationController
   def voice_mail_redirection
     resp = IncomingCallManager.new(set_params, path_params).end_voice_mail
     @call.update(forwarding: 2,
-                 status: params[:CallStatus],
+                 status: 'completed',
                  duration: set_duration)
     Record.create(record_params)
     render xml: resp
@@ -34,7 +34,7 @@ class IvrController < ApplicationController
 
   def phone_redirection
     @call.update(forwarding: 1,
-                 status: params[:CallStatus],
+                 status: 'completed',
                  duration: set_duration)
     resp = IncomingCallManager.new(set_params, path_params).end_phone_call
     render xml: resp
