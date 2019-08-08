@@ -1,0 +1,47 @@
+<% if @calls.empty? %>
+  <h3 class="text-center">You haven't any call yet </h3>
+  <% else %>
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Date (UTC)</th>
+          <th scope="col">Direction</th>
+          <th scope="col">From</th>
+          <th scope="col">To</th>
+          <th scope="col">forwarding</th>
+          <th scope="col">Status</th>
+          <th scope="col">Duration</th>
+          <th scope="col">Voicemail duration</th>
+          <th scope="col">Voicemail link</th>
+        </tr>
+      </thead>
+    <tbody>
+        <% @calls.each do |call| %>
+          <tr>
+            <td><%= call.created_at %></td>
+            <td><%= call.direction %></td>
+            <td><%= call.from %></td>
+            <td><%= call.called %></td>
+            <% if call.forwarding == 0 %>
+              <td> Hung up before forwarding</td>
+            <% elsif call.forwarding == 1 %>
+              <td> Forwarded </td>
+             <% else %>
+              <td> Voicemail </td>
+            <% end %>
+            <td><%= call.forwarding %></td>
+            <td><%= call.status %></td>
+            <td><%= call.duration %> seconds </td>
+            <% if call.record %>
+              <td><%= call.record.duration %> seconds</td>
+              <td><a href="<%= call.record.link %>" target='_blank' > Voicemail </a></td>
+            <% else %>
+              <td><i>no voicemail</i></td>
+              <td><i>no voicemail</i></td>
+            <% end %>
+          </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <%= paginate @calls %>
+<% end %>
