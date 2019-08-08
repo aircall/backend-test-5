@@ -3,10 +3,10 @@
 # Web service which handle incoming calls
 class IvrController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :set_call, only: [:voice_mail_redirection, :phone_redirection] 
+  before_action :set_call, only: %i[voice_mail_redirection phone_redirection]
 
   # A new incoming call always reachs
-  # at first process_incoming_call method 
+  # at first process_incoming_call method
   # Webhook configuration: calls/process_incoming_call
   def process_incoming_call
     @call = Call.create(call_params)
@@ -25,16 +25,16 @@ class IvrController < ApplicationController
 
   def voice_mail_redirection
     resp = IncomingCallManager.new(set_params, path_params).end_voice_mail
-    @call.update(forwarding: 2, 
-                 status: params[:CallStatus], 
+    @call.update(forwarding: 2,
+                 status: params[:CallStatus],
                  duration: set_duration)
     Record.create(record_params)
     render xml: resp
   end
 
   def phone_redirection
-    @call.update(forwarding: 1, 
-                 status: params[:CallStatus], 
+    @call.update(forwarding: 1,
+                 status: params[:CallStatus],
                  duration: set_duration)
     resp = IncomingCallManager.new(set_params, path_params).end_phone_call
     render xml: resp
@@ -62,23 +62,23 @@ class IvrController < ApplicationController
   def record_params
     params = set_params
     {
-      call_id: @call.id, 
-      sid: params[:RecordingSid], 
-      duration: params[:RecordingDuration], 
+      call_id: @call.id,
+      sid: params[:RecordingSid],
+      duration: params[:RecordingDuration],
       link: params[:RecordingUrl]
     }
   end
 
   def path_params
-    { 
-      process_selected_choice_path: url_for(action: 'process_selected_choice', controller: 'ivr'), 
-      give_choice_path: url_for(action: 'give_choice', controller: 'ivr'), 
-      voice_mail_redirection_path: url_for(action: 'voice_mail_redirection', controller: 'ivr'), 
+    {
+      process_selected_choice_path: url_for(action: 'process_selected_choice', controller: 'ivr'),
+      give_choice_path: url_for(action: 'give_choice', controller: 'ivr'),
+      voice_mail_redirection_path: url_for(action: 'voice_mail_redirection', controller: 'ivr'),
       phone_redirection_path: url_for(action: 'phone_redirection', controller: 'ivr')
     }
   end
 
-  def set_call 
+  def set_call
     @call = Call.find_by_sid(params[:CallSid])
   end
 
