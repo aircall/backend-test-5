@@ -42,9 +42,6 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     bindex (0.8.1)
-    bootstrap-kaminari-views (0.0.5)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
     builder (3.2.3)
     byebug (11.0.1)
     capybara (2.18.0)
@@ -198,7 +195,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-kaminari-views
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
