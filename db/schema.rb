@@ -10,11 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170719183956) do
+ActiveRecord::Schema.define(version: 20190807152446) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "calls", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "from", limit: 20
+    t.string "direction", limit: 20
+    t.string "called", limit: 20
+    t.string "sid", limit: 34
+    t.string "status", limit: 20
+    t.integer "forwarding", default: 0
+    t.integer "duration"
+    t.index ["sid"], name: "index_calls_on_sid", unique: true
   end
 
+  create_table "records", force: :cascade do |t|
+    t.string "sid", limit: 40
+    t.integer "duration"
+    t.string "link", limit: 150
+    t.bigint "call_id"
+    t.index ["call_id"], name: "index_records_on_call_id"
+  end
+
+  add_foreign_key "records", "calls"
 end
