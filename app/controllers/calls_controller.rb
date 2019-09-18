@@ -21,6 +21,7 @@ class CallsController < ApplicationController
       when '2'
         # leave voicemail
       else
+        twiml_response.hangup
     end
 
     render xml: twiml_response.to_s
