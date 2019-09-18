@@ -4,8 +4,8 @@ class CallsController < ApplicationController
   def ivr
     twiml_response = Twilio::TwiML::VoiceResponse.new
 
+    twiml_response.say("Press 1 to redirect call or press 2 to leave a voicemail", voice: 'alice', loop: 3)
     twiml_gather = Twilio::TwiML::Gather.new(num_digits: '1', action: 'https://backend-test-5.herokuapp.com/calls/ivr_menu_select')
-    twiml_gather.say("Press 1 to redirect call or press 2 to leave a voicemail", voice: 'alice', loop: 3)
     twiml_response.append(twiml_gather)
 
     render xml: twiml_response.to_s
