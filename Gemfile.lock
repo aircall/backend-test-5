@@ -88,7 +88,6 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.0)
       mini_portile2 (~> 2.2.0)
-    pg (1.1.4)
     public_suffix (2.0.5)
     puma (3.9.1)
     rack (2.0.3)
