@@ -17,7 +17,7 @@ class CallsController < ApplicationController
 
     case selected_digit
       when '1'
-        twiml_response.dial(number: '+33123456789')
+        twiml_response.dial(number: '6054756959')
       when '2'
         # leave voicemail
       else
