@@ -1,4 +1,5 @@
 class CallsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   
   def ivr
     twiml_response = Twilio::TwiML::VoiceResponse.new
