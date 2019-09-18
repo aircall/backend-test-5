@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   scope '/calls', :controller => :calls do
     post :ivr
-    post :ivr_menu_selection
+    post :ivr_menu_select
   end
 
 end
