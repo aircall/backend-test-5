@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   root to: 'calls#index'
 
-
+  scope '/calls', :controller => :calls do
+    post :ivr
+  end
 
 end
