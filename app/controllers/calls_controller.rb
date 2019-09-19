@@ -19,12 +19,17 @@ class CallsController < ApplicationController
       when '1'
         twiml_response.dial(number: '7325168130')
       when '2'
-        # leave voicemail
+        twiml_response.record(play_beep: 'true', max_length: '60', action: 'https://backend-test-5.herokuapp.com/calls/create_voicemail')
       else
         twiml_response.hangup
     end
 
     render xml: twiml_response.to_s
+  end
+
+  def create_voicemail
+    voicemail_url = params[:RecordingUrl]
+
   end
 
 end
