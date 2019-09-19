@@ -30,9 +30,8 @@ class CallsController < ApplicationController
   end
 
   def create_voicemail
-    voicemail_url = params[:RecordingUrl]
-    @call         = Call.find(params[:call_id])
-
+    @call = Call.find(params[:call_id])
+    @call.update(voicemail_url: params[:RecordingUrl], status: 'Over')
     # default no content response
   end
 
