@@ -5,7 +5,7 @@ class CallsController < ApplicationController
     twiml_response = Twilio::TwiML::VoiceResponse.new
     @call = Call.create(caller: params['From'], status: 'Active')
 
-    twiml_gather = Twilio::TwiML::Gather.new(num_digits: '1', action: "https://backend-test-5.herokuapp.com/calls/:#{@call.id}/ivr_menu_select")
+    twiml_gather = Twilio::TwiML::Gather.new(num_digits: '1', action: "https://backend-test-5.herokuapp.com/calls/#{@call.id}/ivr_menu_select")
     twiml_gather.say(message: "Press 1 to redirect call or press 2 to leave a voicemail", voice: 'alice', loop: 3)
     twiml_response.append(twiml_gather)
 
@@ -21,7 +21,7 @@ class CallsController < ApplicationController
       when '1'
         twiml_response.dial(number: '7325168130')
       when '2'
-        twiml_response.record(play_beep: 'true', max_length: '60', action: "https://backend-test-5.herokuapp.com/calls/:#{@call.id}/create_voicemail")
+        twiml_response.record(play_beep: 'true', max_length: '60', action: "https://backend-test-5.herokuapp.com/calls/#{@call.id}/create_voicemail")
       else
         twiml_response.hangup
     end
