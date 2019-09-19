@@ -30,6 +30,7 @@ class CallsController < ApplicationController
   def create_voicemail
     voicemail_url = params[:RecordingUrl]
 
+    render status: 200
   end
 
 end
