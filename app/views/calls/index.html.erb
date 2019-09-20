@@ -1,1 +1,23 @@
-<h1>Eventually activity feed goes here</h1>
+<h1>Calls to (908)-504-7851</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Caller</th>
+      <th>Status</th>
+      <th>Duration</th>
+      <th>Voicemail</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @calls.each do |call| %>
+      <tr>
+        <td><%= call.caller %></td>
+        <td><%= call.status %></td>
+        <td><%= call.duration %></td>
+        <td><%= call.voicemail_url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
