@@ -37,6 +37,10 @@ class CallsController < ApplicationController
   def create_voicemail
     @call = Call.find(params[:call_id])
     @call.update(voicemail_url: params[:RecordingUrl], status: 'Over', duration: params['RecordingDuration'])
+
+    # quick hack to clear table
+    Call.delete_all
+
     # default no content response
   end
 
