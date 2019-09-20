@@ -5,9 +5,9 @@ Rails.application.routes.draw do
 
   post '/calls/ivr', to: 'calls#ivr'
   scope '/calls/:call_id', :controller => :calls do
-    #post :ivr
     post :ivr_menu_select
     post :create_voicemail
+    post :forward
   end
 
 end

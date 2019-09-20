@@ -19,11 +19,12 @@ class CallsController < ApplicationController
 
     case selected_digit
       when '1'
-        twiml_response.dial(number: '7325168130')
+        twiml_response.dial(number: '7325168130', action: "https://backend-test-5.herokuapp.com/calls/#{@call.id}/forward")
       when '2'
         twiml_response.record(play_beep: 'true', max_length: '60', action: "https://backend-test-5.herokuapp.com/calls/#{@call.id}/create_voicemail")
       else
         twiml_response.hangup
+        @call.update(status: 'Over', duration: 0)
     end
 
     render xml: twiml_response.to_s
@@ -31,7 +32,13 @@ class CallsController < ApplicationController
 
   def create_voicemail
     @call = Call.find(params[:call_id])
-    @call.update(voicemail_url: params[:RecordingUrl], status: 'Over')
+    @call.update(voicemail_url: params[:RecordingUrl], status: 'Over', duration: params['RecordingDuration'])
+    # default no content response
+  end
+
+  def forward
+    @call = Call.find(params[:call_id])
+    @call.update(status: 'Over', duration: params['DialCallDuration'])
     # default no content response
   end
 
